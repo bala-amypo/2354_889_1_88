@@ -1,6 +1,8 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.Id;
+
+
 public class user{
     @Id
     private Long id;
