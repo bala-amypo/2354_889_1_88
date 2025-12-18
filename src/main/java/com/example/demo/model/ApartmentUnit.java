@@ -1,9 +1,8 @@
 package com.example.demo.entity;
 
-package com.example.demo.entity;
-
-import jakarta.persistence.*;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Min;
+
 @Entity
 @Table(
     name = "apartment_units",
