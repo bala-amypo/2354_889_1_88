@@ -1,7 +1,17 @@
 package com.example.demo.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.demo.model.Booking;
-public interface bookingRepository extends JpaRepository<Booking,Long>{
-    
+import com.example.demo.model.Facility;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+public interface BookingRepository extends JpaRepository<Booking, Long> {
+
+    List<Booking> findByFacilityAndStartTimeLessThanAndEndTimeGreaterThan(
+            Facility facility,
+            LocalDateTime start,
+            LocalDateTime end
+    );
 }
