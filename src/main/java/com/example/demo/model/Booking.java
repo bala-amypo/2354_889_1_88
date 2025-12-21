@@ -4,51 +4,71 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "booking_logs")
-public class BookingLogModel {
+@Table(name = "bookings")
+public class BookingModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    private BookingModel booking;
+    private FacilityModel facility;
 
-    private String logMessage;
-    private LocalDateTime loggedAt;
+    @ManyToOne
+    private UserModel user;
 
-    public BookingLogModel() {
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
+    private String status;
+
+    public BookingModel() {
     }
 
     public Long getId() {
         return id;
     }
 
-    public BookingModel getBooking() {
-        return booking;
+    public FacilityModel getFacility() {
+        return facility;
     }
 
-    public String getLogMessage() {
-        return logMessage;
+    public UserModel getUser() {
+        return user;
     }
 
-    public LocalDateTime getLoggedAt() {
-        return loggedAt;
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
+    public String getStatus() {
+        return status;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setBooking(BookingModel booking) {
-        this.booking = booking;
+    public void setFacility(FacilityModel facility) {
+        this.facility = facility;
     }
 
-    public void setLogMessage(String logMessage) {
-        this.logMessage = logMessage;
+    public void setUser(UserModel user) {
+        this.user = user;
     }
 
-    public void setLoggedAt(LocalDateTime loggedAt) {
-        this.loggedAt = loggedAt;
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

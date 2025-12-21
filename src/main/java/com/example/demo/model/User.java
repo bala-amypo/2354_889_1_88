@@ -1,55 +1,75 @@
-package com.example.demo.entity;
+package com.example.demo.model;
 
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "users")
+public class UserModel {
 
-public class user{
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    @Column(unique=true)
-    private String email;
-    private String ADMIN;
-    private String RESIDENT
 
-    public User() {
-    }
-    public User(Long id, String name, String email, String role) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.role = role;
+    private String name;
+
+    @Column(unique = true, nullable = false)
+    private String email;
+
+    private String password;
+
+    private String role;
+
+    @OneToOne
+    private ApartmentUnitModel apartmentUnit;
+
+    public UserModel() {
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getPassword() {
+        return password;
     }
 
     public String getRole() {
         return role;
     }
 
+    public ApartmentUnitModel getApartmentUnit() {
+        return apartmentUnit;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public void setApartmentUnit(ApartmentUnitModel apartmentUnit) {
+        this.apartmentUnit = apartmentUnit;
     }
 }
