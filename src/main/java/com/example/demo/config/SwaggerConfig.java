@@ -1,19 +1,19 @@
 package com.example.demo.config;
 
-import io.swagger.v3.oas.models.*;
-import io.swagger.v3.oas.models.info.Info;
-
-import org.springframework.context.annotation.*;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.servers.Server;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import java.util.List;
 
 @Configuration
 public class SwaggerConfig {
 
     @Bean
-    public OpenAPI apiInfo() {
+    public OpenAPI customOpenAPI() {
         return new OpenAPI()
-                .info(new Info()
-                        .title("Apartment Facility Booking System API")
-                        .version("1.0")
-                        .description("Booking, Facility, Apartment & User Management"));
+                .servers(List.of(
+                        new Server().url("https://9229.pro604cr.amypo.ai/")
+                ));
     }
 }
