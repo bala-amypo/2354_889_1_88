@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.FacilityModel;
+import com.example.demo.model.Facility;
 import com.example.demo.service.FacilityService;
-import org.springframework.http.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,19 +11,16 @@ import java.util.List;
 @RequestMapping("/facilities")
 public class FacilityController {
 
-    private final FacilityService facilityService;
-
-    public FacilityController(FacilityService facilityService) {
-        this.facilityService = facilityService;
-    }
+    @Autowired
+    private FacilityService facilityService;
 
     @PostMapping
-    public ResponseEntity<FacilityModel> add(@RequestBody FacilityModel facility) {
-        return ResponseEntity.ok(facilityService.addFacility(facility));
+    public Facility addFacility(@RequestBody Facility facility) {
+        return facilityService.addFacility(facility);
     }
 
     @GetMapping
-    public ResponseEntity<List<FacilityModel>> all() {
-        return ResponseEntity.ok(facilityService.getAllFacilities());
+    public List<Facility> getFacilities() {
+        return facilityService.getAllFacilities();
     }
 }
