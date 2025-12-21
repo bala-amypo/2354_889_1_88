@@ -29,9 +29,4 @@ public class AuthController {
     public ResponseEntity<String> login() {
         return ResponseEntity.ok("Login handled via JWT (mock response)")
     }
-    @PostMapping("/register")
-public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
-    return ResponseEntity.ok("User registered successfully");
-}
-
 }
