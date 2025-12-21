@@ -1,15 +1,14 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Facility;
+import com.example.demo.model.FacilityModel;
 import com.example.demo.service.FacilityService;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/facilities")
-@Tag(name = "Facilities")
 public class FacilityController {
 
     private final FacilityService facilityService;
@@ -19,12 +18,12 @@ public class FacilityController {
     }
 
     @PostMapping
-    public Facility addFacility(@RequestBody Facility facility) {
-        return facilityService.addFacility(facility);
+    public ResponseEntity<FacilityModel> add(@RequestBody FacilityModel facility) {
+        return ResponseEntity.ok(facilityService.addFacility(facility));
     }
 
     @GetMapping
-    public List<Facility> getAllFacilities() {
-        return facilityService.getAllFacilities();
+    public ResponseEntity<List<FacilityModel>> all() {
+        return ResponseEntity.ok(facilityService.getAllFacilities());
     }
 }

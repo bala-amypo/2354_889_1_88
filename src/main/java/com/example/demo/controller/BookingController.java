@@ -1,13 +1,12 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Booking;
+import com.example.demo.model.BookingModel;
 import com.example.demo.service.BookingService;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/bookings")
-@Tag(name = "Bookings")
 public class BookingController {
 
     private final BookingService bookingService;
@@ -17,20 +16,21 @@ public class BookingController {
     }
 
     @PostMapping("/{facilityId}/{userId}")
-    public Booking createBooking(
+    public ResponseEntity<BookingModel> create(
             @PathVariable Long facilityId,
             @PathVariable Long userId,
-            @RequestBody Booking booking) {
-        return bookingService.createBooking(facilityId, userId, booking);
+            @RequestBody BookingModel booking) {
+        return ResponseEntity.ok(
+                bookingService.createBooking(facilityId, userId, booking));
     }
 
     @PutMapping("/cancel/{bookingId}")
-    public Booking cancelBooking(@PathVariable Long bookingId) {
-        return bookingService.cancelBooking(bookingId);
+    public ResponseEntity<BookingModel> cancel(@PathVariable Long bookingId) {
+        return ResponseEntity.ok(bookingService.cancelBooking(bookingId));
     }
 
     @GetMapping("/{bookingId}")
-    public Booking getBooking(@PathVariable Long bookingId) {
-        return bookingService.getBooking(bookingId);
+    public ResponseEntity<BookingModel> get(@PathVariable Long bookingId) {
+        return ResponseEntity.ok(bookingService.getBooking(bookingId));
     }
 }
