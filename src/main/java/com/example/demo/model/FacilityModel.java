@@ -1,60 +1,26 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
+@Data 
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "facilities")
-public class FacilityModel {
-
+public class Facility{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable=false)
     private String name;
+
     private String description;
+    
+    @Column(nullable=false)
     private String openTime;
-    private String closeTime;
 
-    public FacilityModel() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getOpenTime() {
-        return openTime;
-    }
-
-    public String getCloseTime() {
-        return closeTime;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setOpenTime(String openTime) {
-        this.openTime = openTime;
-    }
-
-    public void setCloseTime(String closeTime) {
-        this.closeTime = closeTime;
-    }
+    @Column(nullable=false)
+    private String closeTime;  
 }

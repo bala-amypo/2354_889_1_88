@@ -1,74 +1,39 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import lombok.*;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "bookings")
-public class BookingModel {
+public class Booking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private FacilityModel facility;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "facility_id")
+    private Facility facility;
 
-    @ManyToOne
-    private UserModel user;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id")
+    private User user;
 
+    @Column(nullable = false)
     private LocalDateTime startTime;
+
+    @Column(nullable = false)
     private LocalDateTime endTime;
-    private String status;
 
-    public BookingModel() {
-    }
+    @Column(nullable = false)
+    private String status = "CONFIRMED";
 
-    public Long getId() {
-        return id;
-    }
-
-    public FacilityModel getFacility() {
-        return facility;
-    }
-
-    public UserModel getUser() {
-        return user;
-    }
-
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-
-    public LocalDateTime getEndTime() {
-        return endTime;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setFacility(FacilityModel facility) {
-        this.facility = facility;
-    }
-
-    public void setUser(UserModel user) {
-        this.user = user;
-    }
-
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
+    private List<BookingLog> bookingLogs;
 }
