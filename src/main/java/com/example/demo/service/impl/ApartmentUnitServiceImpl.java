@@ -1,39 +1,86 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.ApartmentUnit;
-import com.example.demo.model.User;
 import com.example.demo.repository.ApartmentUnitRepository;
-import com.example.demo.repository.UserRepository;
 import com.example.demo.service.ApartmentUnitService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ApartmentUnitServiceImpl implements ApartmentUnitService {
 
-    private final ApartmentUnitRepository unitRepository;
-    private final UserRepository userRepository;
+    private final ApartmentUnitRepository repository;
 
-    @Autowired
-    public ApartmentUnitServiceImpl(ApartmentUnitRepository unitRepository, UserRepository userRepository) {
-        this.unitRepository = unitRepository;
-        this.userRepository = userRepository;
+    public ApartmentUnitServiceImpl(ApartmentUnitRepository repository) {
+        this.repository = repository;
     }
 
     @Override
-    public ApartmentUnit assignUnit(Long userId, ApartmentUnit unit) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-        unit.setOwner(user);
-        return unitRepository.save(unit);
+    public ApartmentUnit save(ApartmentUnit unit) {
+        return repository.save(unit);
     }
 
     @Override
-    public ApartmentUnit getUnitByUser(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-        return unitRepository.findByOwner(user)
-                .orElseThrow(() -> new ResourceNotFoundException("Unit not found for user"));
+    public List<ApartmentUnit> findAll() {
+        return repository.findAll();
+    }
+
+    @Override
+    public ApartmentUnit findById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("ApartmentUnit not found with id " + id));
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        if (!repository.existsById(id)) {
+            throw new ResourceNotFoundException("ApartmentUnit not found with id " + id);
+        }
+        repository.deleteById(id);
+    }
+}
+package com.example.demo.service.impl;
+
+import com.example.demo.model.ApartmentUnit;
+import com.example.demo.repository.ApartmentUnitRepository;
+import com.example.demo.service.ApartmentUnitService;
+import com.example.demo.exception.ResourceNotFoundException;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class ApartmentUnitServiceImpl implements ApartmentUnitService {
+
+    private final ApartmentUnitRepository repository;
+
+    public ApartmentUnitServiceImpl(ApartmentUnitRepository repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public ApartmentUnit save(ApartmentUnit unit) {
+        return repository.save(unit);
+    }
+
+    @Override
+    public List<ApartmentUnit> findAll() {
+        return repository.findAll();
+    }
+
+    @Override
+    public ApartmentUnit findById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("ApartmentUnit not found with id " + id));
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        if (!repository.existsById(id)) {
+            throw new ResourceNotFoundException("ApartmentUnit not found with id " + id);
+        }
+        repository.deleteById(id);
     }
 }

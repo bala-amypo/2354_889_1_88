@@ -2,23 +2,38 @@ package com.example.demo.controller;
 
 import com.example.demo.model.ApartmentUnit;
 import com.example.demo.service.ApartmentUnitService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/units")
 public class ApartmentUnitController {
 
-    @Autowired
-    private ApartmentUnitService unitService;
+    private final ApartmentUnitService service;
 
-    @PostMapping("/assign/{userId}")
-    public ApartmentUnit assignUnit(@PathVariable Long userId, @RequestBody ApartmentUnit unit) {
-        return unitService.assignUnit(userId, unit);
+    public ApartmentUnitController(ApartmentUnitService service) {
+        this.service = service;
     }
 
-    @GetMapping("/user/{userId}")
-    public ApartmentUnit getUnit(@PathVariable Long userId) {
-        return unitService.getUnitByUser(userId);
+    @PostMapping
+    public ApartmentUnit createUnit(@RequestBody ApartmentUnit unit) {
+        return service.save(unit);
+    }
+
+    @GetMapping
+    public List<ApartmentUnit> getAllUnits() {
+        return service.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public ApartmentUnit getUnitById(@PathVariable Long id) {
+        return service.findById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteUnit(@PathVariable Long id) {
+        service.deleteById(id);
+        return "Apartment unit deleted successfully";
     }
 }

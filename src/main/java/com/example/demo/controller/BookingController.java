@@ -2,28 +2,77 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Booking;
 import com.example.demo.service.BookingService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/bookings")
 public class BookingController {
 
-    @Autowired
-    private BookingService bookingService;
+    private final BookingService service;
 
-    @PostMapping("/{facilityId}/{userId}")
-    public Booking createBooking(@PathVariable Long facilityId, @PathVariable Long userId, @RequestBody Booking booking) {
-        return bookingService.createBooking(facilityId, userId, booking);
+    public BookingController(BookingService service) {
+        this.service = service;
     }
 
-    @PutMapping("/cancel/{bookingId}")
-    public Booking cancelBooking(@PathVariable Long bookingId) {
-        return bookingService.cancelBooking(bookingId);
+    @PostMapping
+    public Booking createBooking(@RequestBody Booking booking) {
+        return service.save(booking);
     }
 
-    @GetMapping("/{bookingId}")
-    public Booking getBooking(@PathVariable Long bookingId) {
-        return bookingService.getBooking(bookingId);
+    @GetMapping
+    public List<Booking> getAllBookings() {
+        return service.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Booking getBookingById(@PathVariable Long id) {
+        return service.findById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteBooking(@PathVariable Long id) {
+        service.deleteById(id);
+        return "Booking deleted successfully";
+    }
+}
+package com.example.demo.controller;
+
+import com.example.demo.model.Booking;
+import com.example.demo.service.BookingService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/bookings")
+public class BookingController {
+
+    private final BookingService service;
+
+    public BookingController(BookingService service) {
+        this.service = service;
+    }
+
+    @PostMapping
+    public Booking createBooking(@RequestBody Booking booking) {
+        return service.save(booking);
+    }
+
+    @GetMapping
+    public List<Booking> getAllBookings() {
+        return service.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Booking getBookingById(@PathVariable Long id) {
+        return service.findById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteBooking(@PathVariable Long id) {
+        service.deleteById(id);
+        return "Booking deleted successfully";
     }
 }
