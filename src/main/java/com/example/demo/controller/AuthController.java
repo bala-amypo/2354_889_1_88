@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.*;
 import com.example.demo.model.UserModel;
 import com.example.demo.service.UserService;
 import org.springframework.http.*;
@@ -17,7 +16,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserModel> register(@RequestBody RegisterRequest request) {
+    public ResponseEntity<UserModel> register(@RequestBody request) {
         UserModel user = new UserModel();
         user.setName(request.getName());
         user.setEmail(request.getEmail());
