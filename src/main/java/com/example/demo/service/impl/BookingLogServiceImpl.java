@@ -8,16 +8,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@Service
-package com.example.demo.service.impl;
-
-import com.example.demo.service.BookingLogService;
-import org.springframework.stereotype.Service;
-
 public class BookingLogServiceImpl implements BookingLogService {
 
-    // implementation
-}
+    private final BookingLogRepository bookingLogRepository;
 
     public BookingLogServiceImpl(BookingLogRepository bookingLogRepository) {
         this.bookingLogRepository = bookingLogRepository;

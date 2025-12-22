@@ -6,5 +6,4 @@ import java.util.List;
 public interface BookingLogService {
 
     List<BookingLog> getLogsByBooking(Long bookingId);
-
 }
