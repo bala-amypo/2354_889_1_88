@@ -5,11 +5,6 @@ import java.util.List;
 
 public interface BookingLogService {
 
-    BookingLog save(BookingLog log);
+    List<BookingLog> getLogsByBooking(Long bookingId);
 
-    List<BookingLog> findAll();
-
-    BookingLog findById(Long id);
-
-    void deleteById(Long id);
 }
