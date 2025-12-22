@@ -9,9 +9,15 @@ import java.util.List;
 
 @Service
 @Service
-public class BookingLogServiceImpl implements BookingLogService{
+package com.example.demo.service.impl;
 
-    private final BookingLogRepository bookingLogRepository;
+import com.example.demo.service.BookingLogService;
+import org.springframework.stereotype.Service;
+
+public class BookingLogServiceImpl implements BookingLogService {
+
+    // implementation
+}
 
     public BookingLogServiceImpl(BookingLogRepository bookingLogRepository) {
         this.bookingLogRepository = bookingLogRepository;
