@@ -1,17 +1,29 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "booking")
+@Table(name = "bookings")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Booking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    public Booking() {}
+    @ManyToOne
+    private Facility facility;
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    @ManyToOne
+    private User user;
+
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
+
+    private String status = "CONFIRMED";
 }
