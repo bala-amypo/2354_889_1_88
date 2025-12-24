@@ -6,4 +6,4 @@ import java.util.List;
 
 public interface BookingLogRepository extends JpaRepository<BookingLog, Long> {
     List<BookingLog> findByBookingOrderByLoggedAtAsc(Booking booking);
-}
+}   
