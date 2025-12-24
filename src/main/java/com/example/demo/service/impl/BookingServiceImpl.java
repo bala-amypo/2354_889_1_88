@@ -5,9 +5,11 @@ import com.example.demo.model.*;
 import com.example.demo.repository.*;
 import com.example.demo.service.BookingService;
 import com.example.demo.service.BookingLogService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class BookingServiceImpl implements BookingService {
 
     private final BookingRepository bookingRepository;

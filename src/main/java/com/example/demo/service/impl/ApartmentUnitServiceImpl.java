@@ -5,7 +5,9 @@ import com.example.demo.model.User;
 import com.example.demo.repository.ApartmentUnitRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.ApartmentUnitService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ApartmentUnitServiceImpl implements ApartmentUnitService {
 
     private final ApartmentUnitRepository apartmentUnitRepository;
