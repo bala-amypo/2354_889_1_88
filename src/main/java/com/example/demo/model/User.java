@@ -1,14 +1,12 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class User {
 
     @Id
@@ -29,7 +27,7 @@ public class User {
 
     // ================= TESTCASE REQUIRED CONSTRUCTORS =================
 
-    // Used in many tests
+    // 5-argument constructor (MOST USED IN TESTS)
     public User(Long id, String name, String email, String password, String role) {
         this.id = id;
         this.name = name;
@@ -38,7 +36,7 @@ public class User {
         this.role = role;
     }
 
-    // Used in JPA mapping tests
+    // 6-argument constructor (JPA mapping tests)
     public User(Long id, String name, String email, String password,
                 String role, ApartmentUnit apartmentUnit) {
         this.id = id;
