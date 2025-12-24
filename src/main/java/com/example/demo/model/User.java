@@ -27,9 +27,9 @@ public class User {
     @OneToOne(mappedBy = "owner", cascade = CascadeType.ALL)
     private ApartmentUnit apartmentUnit;
 
-    // -------------------- REQUIRED BY TESTCASES --------------------
+    // ================= TESTCASE REQUIRED CONSTRUCTORS =================
 
-    // 5-arg constructor (id may be null)
+    // Used in many tests
     public User(Long id, String name, String email, String password, String role) {
         this.id = id;
         this.name = name;
@@ -38,7 +38,7 @@ public class User {
         this.role = role;
     }
 
-    // 6-arg constructor (with apartmentUnit)
+    // Used in JPA mapping tests
     public User(Long id, String name, String email, String password,
                 String role, ApartmentUnit apartmentUnit) {
         this.id = id;
